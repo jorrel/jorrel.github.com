@@ -7,25 +7,29 @@
     <style type="text/css">
       body {
         font-family: Verdana;
-        font-size: 1.2em;
+        /*font-size: 1.2em;*/
         background: #D4D2FB url(images/gradient.png) repeat-y;
-        margin: 2em 10em;
+        margin: 2em 0em 2em 10em;
       }
       h1 {
-        font-size: 1.2em;
+        /*font-size: 1.2em;*/
+      }
+      ul {
+        list-style-type: none;
+        padding-left: 0.5em;
       }
       #photo {
-        float: right;
+        float: left;
       }
       #photo img {
         width: 173px;
         height: 180px;
       }
       #links {
-        list-style-type: none;
-        padding-left: 0.5em;
+        float: left;
+        width: 500px
       }
-      #links li {
+      #links ul li {
         padding: 5px 0;
       }
       .link-url {
@@ -39,64 +43,104 @@
       .link-url:after {
         content: ')';
       }
+      #repos {
+        float: left;
+        width: 200px;
+      }
       #foot {
         text-align: center;
         font-size: 0.7em;
         color: #777;
         margin: 2em 0 0 0;
+        clear: both;
       }
     </style>
   </head>
   <body>
     <h1>Welcome, you reached Jorrel's webpage.</h1>
-    <p>
-      Here's some links:
-    </p>
+    <div id="links">
+      <p>
+        Here's some links:
+      </p>
+      <ul>
+        <li>
+          <a href="http://www.upstrat.com/">Company</a>
+          <span class="link-url">http://www.upstrat.com/</span>
+        </li>
+        <li>
+          <a href="http://jorrel.blogspot.com/">Blog</a>
+          <span class="link-url">http://jorrel.blogspot.com/</span>
+        </li>
+        <li>
+          <a href="http://www.twitter.com/jorrel">Twitter</a>
+          <span class="link-url">http://www.twitter.com/jorrel</span>
+        </li>
+        <li>
+          <a href="http://github.com/jorrel">GitHub</a>
+          <span class="link-url">http://github.com/jorrel</span>
+        </li>
+        <li>
+          <a href="http://del.icio.us/jorrel">del.icio.us</a>
+          <span class="link-url">http://del.icio.us/jorrel</span>
+        </li>
+        <li>
+          <a href="http://www.friendster.com/jorrel">Friendster</a>
+          <span class="link-url">http://www.friendster.com/jorrel</span>
+        </li>
+        <li>
+          <a href="http://picasaweb.google.com/jorrel">Picasa</a>
+          <span class="link-url">http://picasaweb.google.com/jorrel</span>
+        </li>
+        <li>
+          <a href="http://friendfeed.com/jorrel">FriendFeed</a>
+          <span class="link-url">http://friendfeed.com/jorrel</span>
+        </li>
+        <li>
+          <a href="http://www.workingwithrails.com/person/5866-jorrel-ang">Working With Rails</a>
+          <span class="link-url">http://www.workingwithrails.com/person/5866-jorrel-ang</span>
+        </li>
+        <li>
+          <a href="http://www.google.com/search?q=jorrel+ang">others</a>
+          <span class="link-url">http://www.google.com/search?q=jorrel+ang</span>
+        </li>
+      </ul>
+    </div>
+
     <div id="photo">
       <img src="images/jorrel-southpark.jpg" alt="jorrel's avatar" />
     </div>
-    <ul id="links">
-      <li>
-        <a href="http://www.upstrat.com/">Company</a>
-        <span class="link-url">http://www.upstrat.com/</span>
-      </li>
-      <li>
-        <a href="http://jorrel.blogspot.com/">Blog</a>
-        <span class="link-url">http://jorrel.blogspot.com/</span>
-      </li>
-      <li>
-        <a href="http://www.twitter.com/jorrel">Twitter</a>
-        <span class="link-url">http://www.twitter.com/jorrel</span>
-      </li>
-      <li>
-        <a href="http://github.com/jorrel">GitHub</a>
-        <span class="link-url">http://github.com/jorrel</span>
-      </li>
-      <li>
-        <a href="http://del.icio.us/jorrel">del.icio.us</a>
-        <span class="link-url">http://del.icio.us/jorrel</span>
-      </li>
-      <li>
-        <a href="http://www.friendster.com/jorrel">Friendster</a>
-        <span class="link-url">http://www.friendster.com/jorrel</span>
-      </li>
-      <li>
-        <a href="http://picasaweb.google.com/jorrel">Picasa</a>
-        <span class="link-url">http://picasaweb.google.com/jorrel</span>
-      </li>
-      <li>
-        <a href="http://friendfeed.com/jorrel">FriendFeed</a>
-        <span class="link-url">http://friendfeed.com/jorrel</span>
-      </li>
-      <li>
-        <a href="http://www.workingwithrails.com/person/5866-jorrel-ang">Working With Rails</a>
-        <span class="link-url">http://www.workingwithrails.com/person/5866-jorrel-ang</span>
-      </li>
-      <li>
-        <a href="http://www.google.com/search?q=jorrel+ang">others</a>
-        <span class="link-url">http://www.google.com/search?q=jorrel+ang</span>
-      </li>
-    </ul>
+
+    <div id="repos">
+      <p>My Codes:</p>
+      <ul>
+      </ul>
+    </div>
+
     <div id="foot">:)</div>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var projects;
+      $(function() {
+        var limit = 30; // how many repos to list
+        var login = 'jorrel'; // your username
+
+        $.getJSON('http://github.com/api/v1/json/' + login + '?callback=?', function(data) {
+         projects = data;
+          var repos = $.grep(data.user.repositories, function(repo) {
+            return !(repo.fork || repo.name == login + '.github.com');
+          });
+
+          repos.sort(function(a, b) {
+            return b.watchers - a.watchers;
+          });
+
+          $.each(repos.slice(0, limit), function() {
+            $('#repos ul').append('<li><a href="' + this.url + '">' + this.name + '</a></li>');
+          });
+        });
+      });
+    </script>
   </body>
 </html>
